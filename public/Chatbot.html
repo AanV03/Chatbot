@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AirGuard | Filtro de Aire Inteligente</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/css/mainpage.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="bg-dark text-white p-3">
+        <div class="container d-flex justify-content-between align-items-center">
+            <img src="./img/logo.png" class="logo" alt="Logo AirGuard" />
+            <nav>
+                <button class="buttonLogin" id="login" onclick="login()">Iniciar sesión</button>
+                <button class="buttonRegister" id="register" onclick="register()">Registrarse</button>
+                <button class="buttonShop"><i class="bi bi-cart4"></i></button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero text-white d-flex align-items-center justify-content-center text-center">
+        <div>
+            <h2>Respira inteligente. Vive mejor.</h2>
+            <p class="lead">AirGuard detecta, filtra y protege. Calidad de aire en tiempo real, desde cualquier lugar.
+            </p>
+            <a href="#sobre" class="arrow-link">
+                Descubre más
+                <span class="arrow-v"></span>
+            </a>
+        </div>
+    </section>
+
+    <!-- SOBRE AIRGUARD -->
+    <section id="sobre" class="py-5 bg-light">
+        <div class="container text-center">
+            <h3 class="mb-4">¿Qué es AirGuard?</h3>
+            <p class="mb-4">
+                AirGuard es un purificador de aire con monitoreo en tiempo real de la calidad del aire en tus espacios.
+                Con sensores de alta precisión, detecta polen, humo, humedad y más, activando filtros inteligentes para
+                que
+                respires mejor, sin esfuerzo.
+            </p>
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Detección</h5>
+                    <p>Sensores que analizan el aire en tiempo real.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Filtrado</h5>
+                    <p>Elimina partículas dañinas automáticamente.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Monitoreo</h5>
+                    <p>Consulta la calidad del aire desde tu app o navegador.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FUNCIONES -->
+    <section id="funciones" class="py-5">
+        <div class="container text-center">
+            <h3 class="mb-4">Funciones destacadas</h3>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="card p-3">
+                        <h6>🌬️ Filtro inteligente</h6>
+                        <p>Activa según el nivel de contaminación.</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card p-3">
+                        <h6>📊 Datos en vivo</h6>
+                        <p>Visualiza la calidad del aire en tu celular.</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card p-3">
+                        <h6>🔔 Alertas automáticas</h6>
+                        <p>Recibe avisos si el aire está contaminado.</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card p-3">
+                        <h6>⚙️ Control remoto</h6>
+                        <p>Enciende, apaga y programa desde la web.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALERÍA -->
+    <section id="galeria" class="py-5 bg-light">
+        <div class="container text-center">
+            <h3 class="mb-4">Vista del sistema</h3>
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <img src="./img/prototipo1.png" class="img-fluid rounded" alt="Mockup sistema 1" />
+                </div>
+                <div class="col-md-4">
+                    <img src="./img/prototipo2.png" class="img-fluid rounded" alt="Mockup sistema 2" />
+                </div>
+                <div class="col-md-4">
+                    <img src="./img/prototipo3.png" class="img-fluid rounded" alt="Mockup sistema 3" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-dark text-white text-center py-3">
+        <p class="mb-0">&copy; 2025 AirGuard | Proyecto IoT Universitario</p>
+    </footer>
+
+    <!-- BOTÓN FLOTANTE PARA ABRIR EL CHAT -->
+    <button class="boton-ayuda" onclick="abrirChat()">
+        <i class="bi bi-question-lg"></i>
+    </button>
+
+    <!-- CONTENEDOR PRINCIPAL DEL CHAT -->
+    <div id="chat-container" class="d-none">
+
+        <!-- SIDEBAR IZQUIERDO -->
+        <aside id="chat-sidebar">
+            <div class="sidebar-header">
+                <button id="nuevo-chat" onclick="crearNuevaConversacion()">
+                    <i class="bi bi-plus-square-fill"></i> Nuevo Chat
+                </button>
+            </div>
+
+            <div id="chat-list"></div>
+        </aside>
+
+        <!-- PANEL PRINCIPAL DEL CHAT -->
+        <main id="chat-panel" class="flex-grow-1 d-flex flex-column">
+
+            <!-- CABECERA -->
+            <div class="chat-header border-bottom p-2 d-flex justify-content-between align-items-center">
+                <strong id="chat-title">Conversación</strong>
+                <div class="d-flex align-items-center gap-2">
+                    <button class="btn btn-outline-secondary btn-sm" onclick="renombrarConversacion()"
+                        title="Renombrar">
+                        <i class="bi bi-pencil-square"></i>
+                    </button>
+                    <button class="btn btn-outline-danger btn-sm" onclick="eliminarConversacion()" title="Eliminar">
+                        <i class="bi bi-trash3-fill"></i>
+                    </button>
+                    <button class="btn btn-outline-secondary btn-sm" onclick="cerrarChat()" title="Cerrar chat">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- VENTANA DE MENSAJES -->
+            <div id="chat-window" class="chat-window flex-grow-1 overflow-auto p-2">
+                <div class="chat-messages" id="chat-messages">
+                    <p class="sistema-msg">Hola, soy <strong>GuardBot</strong>. ¿En qué puedo ayudarte?</p>
+                </div>
+
+                <!-- ENTRADA DE TEXTO -->
+                <div class="chat-input p-2 border-top d-flex gap-2">
+                    <input type="text" id="chat-text" class="form-control" placeholder="Escribe tu mensaje..."
+                        onkeydown="if(event.key === 'Enter') enviarMensaje()">
+                    <button class="btn btn-primary" onclick="enviarMensaje()">Enviar</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Script principal -->
+    <script src="js/Chat_logic.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
