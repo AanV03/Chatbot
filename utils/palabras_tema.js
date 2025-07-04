@@ -1,4 +1,14 @@
 // === Palabras clave por tema ===
+
+/**
+ * @file palabras_tema.js
+ * @description Diccionario de palabras clave por tema y por subtema para análisis semántico en el chatbot.
+ */
+
+/**
+ * Palabras clave asociadas a cada tema principal. Estas palabras ayudan a detectar el tema general de una pregunta.
+ * @type {Object.<string, string[]>}
+ */
 const PalabrasClave = {
     calidad_aire: ["aire", "pureza", "calidad", "respirar", "oxígeno", "índice", "aqi", "pm2.5", "partículas"],
     contaminacion: ["smog", "humo", "emisiones", "fósiles", "industria", "combustibles", "pm10", "ozono", "so2"],
@@ -10,7 +20,13 @@ const PalabrasClave = {
     cordialidad: ["hola", "gracias", "adios", "saludos", "hasta luego", "te agradezco", "me ayudaste"]
 };
 
+
 // === Palabras por subtema ===
+
+/**
+ * Palabras clave asociadas a cada subtema específico. Estas palabras ayudan a afinar la detección semántica dentro de un tema.
+ * @type {Object.<string, string[]>}
+ */
 const PalabrasPorSubtema = {
     "Agricultura y Ganadería": ["actividades", "afectan", "agricultura", "agrícolas", "aire", "alimentar", "alta", "amoníaco", "animales", "análisis"],
     "Ahorro de energía en casa": ["acondicionado", "además", "afecta", "afectar", "agua", "ahorrar", "ahorro", "aire", "alta", "ambiental"],
