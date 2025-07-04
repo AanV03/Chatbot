@@ -36,6 +36,7 @@ mongoose.connect('mongodb+srv://Aaron:pgS81WQt5ejdJSy9@chatbot.eelundm.mongodb.n
     const Conversacion = require('./models/models_conversacion');
     const ChatFeedback = require('./models/models_Feedback');
     const Tema = require('./models/models_temas');
+    const HistorialConsulta = require('./models/models_historial.js');
     const { procesarConsulta } = require('./controllers/consultaController');
 
     Tema.find({}).then(temas => {
@@ -209,6 +210,42 @@ mongoose.connect('mongodb+srv://Aaron:pgS81WQt5ejdJSy9@chatbot.eelundm.mongodb.n
         } catch (err) {
             console.error('[ERROR][feedback]', err);
             res.status(500).json({ error: 'Error al guardar feedback' });
+        }
+    });
+
+    /**
+ * Guarda una entrada en el historial de usuario.
+ * @route POST /api/historial
+ * @access Public
+ */
+    app.post('/api/historial', async (req, res) => {
+        const { usuarioId, mensaje } = req.body;
+        if (!usuarioId || !mensaje) {
+            return res.status(400).json({ error: 'usuarioId y mensaje son obligatorios' });
+        }
+
+        try {
+            await HistorialConsulta.create({ usuarioId, mensaje });
+            res.status(201).json({ ok: true });
+        } catch (err) {
+            console.error('[ERROR][guardar historial]', err);
+            res.status(500).json({ error: 'Error al guardar historial' });
+        }
+    });
+
+    /**
+     * Obtiene el historial de consultas de un usuario.
+     * @route GET /api/historial/:usuarioId
+     * @access Public
+     */
+    app.get('/api/historial/:usuarioId', async (req, res) => {
+        const { usuarioId } = req.params;
+        try {
+            const historial = await HistorialConsulta.find({ usuarioId }).sort({ timestamp: 1 });
+            res.json(historial);
+        } catch (err) {
+            console.error('[ERROR][leer historial]', err);
+            res.status(500).json({ error: 'Error al obtener historial' });
         }
     });
 

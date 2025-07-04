@@ -258,7 +258,17 @@ async function enviarMensaje() {
         timestamp
     });
 
-    // ⬇️ Asignar nombre si es el primer mensaje del usuario y aún no hay nombre asignado
+    //  Guardar también en historial_consultas
+    fetch('/api/historial', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            usuarioId,
+            mensaje: msg
+        })
+    }).catch(err => console.error('[ERROR][Historial usuario]', err));
+
+    // ⬇ Asignar nombre si es el primer mensaje del usuario y aún no hay nombre asignado
     const tieneNombre = conversaciones[conversacionActual].nombre;
     const yaHayUsuario = conversaciones[conversacionActual].filter(m => m.rol === 'user').length === 1;
 
@@ -312,6 +322,49 @@ async function enviarMensaje() {
         }).catch(err => {
             console.error('[ERROR] al enviar feedback automático:', err);
         });
+    }
+}
+
+
+
+async function verHistorialUsuario() {
+    try {
+        const resp = await fetch(`/api/historial/${usuarioId}`);
+        const data = await resp.json();
+
+        const mensajesDiv = document.getElementById('chat-messages');
+        mensajesDiv.innerHTML = '';
+
+        data.forEach(entry => {
+            const p = document.createElement('p');
+
+            const hora = new Date(entry.timestamp).toLocaleTimeString('es-MX', {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            const fecha = new Date(entry.timestamp).toLocaleDateString('es-MX');
+
+            p.className = 'mensaje mensaje-user';
+            p.innerHTML = `Consulta hecha por el usuario: ${entry.mensaje}<br><span class="mensaje-timestamp"><i class="bi bi-clock-fill"></i> ${hora} <i class="bi bi-calendar-event-fill"></i> ${fecha}</span>`;
+            mensajesDiv.appendChild(p);
+        });
+
+        document.getElementById('chat-title').textContent = 'Historial de consultas';
+
+        // Oculta los botones de editar y eliminar
+        document.querySelectorAll('.chat-header button').forEach(btn => {
+            const title = btn.getAttribute('title');
+            if (title === 'Renombrar' || title === 'Eliminar') {
+                btn.style.display = 'none';
+            }
+        });
+
+        // ⛔️ Oculta el input cuando estás en historial
+        document.querySelector('.chat-input').style.display = 'none';
+
+    } catch (err) {
+        console.error('[ERROR][verHistorialUsuario]', err);
     }
 }
 
@@ -384,6 +437,17 @@ function cargarConversacion(id) {
     titulo.textContent = nombreConversacion || 'Conversación sin título';
 
     mensajesDiv.scrollTop = mensajesDiv.scrollHeight;
+
+    // ✅ Restaurar visibilidad de botones y entrada si no es historial
+    if (id !== 'historial-global') {
+        document.querySelectorAll('.chat-header button').forEach(btn => {
+            const title = btn.getAttribute('title');
+            if (title === 'Renombrar' || title === 'Eliminar') {
+                btn.style.display = '';
+            }
+        });
+        document.querySelector('.chat-input').style.display = '';
+    }
 }
 
 

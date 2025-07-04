@@ -176,7 +176,7 @@ header {
 
 .boton-ayuda:hover {
     background-color: #084298;
-    transform: scale(1.1);
+    transform: scale(1.);
 }
 
 
@@ -205,7 +205,7 @@ header {
     box-sizing: border-box;
 }
 
-H #chat-container * {
+#chat-container * {
     box-sizing: border-box;
 }
 
@@ -231,7 +231,7 @@ H #chat-container * {
 
 /* Botón de nuevo chat */
 #nuevo-chat {
-    background: linear-gradient(to right, #1276f1, #286ea7);
+    background: linear-gradient(to right, #2486ff, #2516ff);
     color: white;
     font-size: 0.9rem;
     border: none;
@@ -247,8 +247,33 @@ H #chat-container * {
     text-overflow: ellipsis;
 }
 
+/* boton de historial */
 #nuevo-chat:hover {
-    background: linear-gradient(to right, #0e5bb8, #194468);
+    background: linear-gradient(to right, #144c91, #0f0968);
+    transform: scale(1.15);
+}
+
+#ver-historial {
+    background: linear-gradient(to right, #2486ff, #2516ff);
+    color: #ffffff;
+    font-size: 0.9rem;
+    border: none;
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+#ver-historial:hover {
+    background: linear-gradient(to right, #144c91, #0f0968);
+    transform: scale(1.15)
 }
 
 
@@ -264,10 +289,10 @@ H #chat-container * {
 }
 
 #chat-list button {
-    background: linear-gradient(to right, #1276f1, #286ea7);
+    background: linear-gradient(to right, #2486ff, #2516ff);
     border: 1px solid #ccc;
     border-radius: 6px;
-    color: #333;
+    color: #ffffff;
     font-size: 0.85rem;
     font-weight: 500;
     padding: 8px 10px;
@@ -281,7 +306,7 @@ H #chat-container * {
 }
 
 #chat-list button:hover {
-    background: linear-gradient(to right, #0a4995, #11314a);
+    background: linear-gradient(to right, #144c91, #0f0968);
 }
 
 #chat-list button.active {
@@ -473,6 +498,7 @@ H #chat-container * {
     background-color: #084298;
     transform: scale(1.03);
 }
+
 
 
 /* ======== MEDIA QUERIES ======== */
